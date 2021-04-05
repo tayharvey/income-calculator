@@ -3,6 +3,10 @@ body {
   font-family: Roboto, Helvetica, Arial;
 }
 
+.line-break {
+  white-space: pre-line;
+}
+
 .page-content-wrapper {
   margin-left: 250px;
 }

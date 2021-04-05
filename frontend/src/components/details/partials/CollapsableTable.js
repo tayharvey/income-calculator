@@ -38,22 +38,21 @@ export const CollapsableTable = ({
           <ExpandLessIcon/> : <ExpandMoreIcon/>}{header}
         </Grid>
         <CalculationsTooltip style={{top: "25px !important"}}
-                             title={CALCULATION_TOOLTIPS[dataKey]?.last_year_total}
+                             title={<span className="line-break">{CALCULATION_TOOLTIPS[dataKey]?.last_year_total}</span>}
                              placement="top">
 
           <Grid item xs={2}>{formatData(data.last_year_total, dataKey)}</Grid>
         </CalculationsTooltip>
-        <CalculationsTooltip title={CALCULATION_TOOLTIPS[dataKey]?.ytd_total}
+        <CalculationsTooltip title={<span className="line-break">{CALCULATION_TOOLTIPS[dataKey]?.ytd_total}</span>}
                              placement="top">
           <Grid item xs={3}
                 className='padding-left-20'>{formatData(data.ytd_total, dataKey)}</Grid>
         </CalculationsTooltip>
         <CalculationsTooltip
-          title={CALCULATION_TOOLTIPS[dataKey]?.projected_total}
+          title={<span className="line-break">{CALCULATION_TOOLTIPS[dataKey]?.projected_total}</span>}
           placement="top">
           <Grid item xs={2}>{formatData(data.projected_total, dataKey)}</Grid>
         </CalculationsTooltip>
-
       </Grid>
       {
         showDetails && Object.keys(data.companies).map(key => {
@@ -66,7 +65,7 @@ export const CollapsableTable = ({
               {Object.keys(rowData).map((key) => {
                 // column with 'ytd_total' key needs to have bigger left padding
                 return <CalculationsTooltip key={key}
-                  title={CALCULATION_TOOLTIPS[dataKey]?.companies?.[key]}
+                  title={<span className="line-break">{CALCULATION_TOOLTIPS[dataKey]?.companies?.[key]}</span>}
                   placement="top">
                   <Grid item xs={key === 'ytd_total' ? 3 : 2}
                         className={key === 'ytd_total' ? 'padding-left-20' : ''}>{formatData(rowData[key], dataKey)}</Grid>
