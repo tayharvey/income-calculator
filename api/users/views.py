@@ -276,7 +276,8 @@ class EmploymentList(generics.ListAPIView):
         argyle_wrapper = ArgyleAPIWrapper()
 
         employments = argyle_wrapper.get_employments(user_id, offset, limit)
-        employments_list = EmploymentSerializer(employments['results'], many=True, context={"user_id": user_id}).data
+        employments_list = EmploymentSerializer(employments['results'], many=True,
+                                                context={"user_id": user_id}).data
 
         pagination = ArgyleApiPagination(int(employments['count']), int(limit), int(offset), request)
         response = pagination.get_paginated_response(employments_list)
