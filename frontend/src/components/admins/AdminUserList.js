@@ -18,7 +18,7 @@ import {ProgressContainer} from "../common/ProgressContainer";
 import {PAGINATION_INITIAL_STATE, SEARCH_TIMEOUT} from "../../consts";
 import {ReactComponent as Search} from '../../icons/search.svg';
 import {AdminsTable} from "./AdminsTable";
-import {typeWatch} from "../utils/general";
+import {sortTable, typeWatch} from "../utils/general";
 
 
 export const AdminUserList = () => {
@@ -31,7 +31,6 @@ export const AdminUserList = () => {
   const [addUserOpen, setAddUserOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState("");
   const [loading, setLoading] = useState(false)
-  const [page, setPage] = useState(0)
   const [paginationState, setPaginationState] = useState(PAGINATION_INITIAL_STATE)
   const [sort, setSort] = useState(null);
   const [search, setSearch] = useState(null);
@@ -74,15 +73,6 @@ export const AdminUserList = () => {
     }
   };
 
-  const onChangePage = (e, newPage) => {
-    if (newPage > page) {
-      loadNextPage()
-    } else {
-      loadPrevPage()
-    }
-    setPage(newPage)
-  }
-
   const addUser = (email) => {
     setAddUserOpen(false);
     setInputFormErrors(INITIAL_STATE);
@@ -110,22 +100,6 @@ export const AdminUserList = () => {
     typeWatch(() => {
       setSearch(value);
     }, SEARCH_TIMEOUT);
-  }
-
-  const sortTable = (sort_by) => {
-    if (sort === sort_by && sort_by === "email") {
-      sort_by = "-email"; // Reverse sorting order
-    } else if (sort === sort_by && sort_by === "-email") {
-      sort_by = "email"; // Reverse sorting order
-    }
-
-    if (sort === sort_by && sort_by === "is_active") {
-      sort_by = "-is_active"; // Reverse sorting order
-    } else if (sort === sort_by && sort_by === "-is_active") {
-      sort_by = "is_active"; // Reverse sorting order
-    }
-
-    setSort(sort_by);
   }
 
   useEffect(fetchAdmins, [sort, search]);
@@ -163,7 +137,8 @@ export const AdminUserList = () => {
                      loadNextPage={loadNextPage} loadPrevPage={loadPrevPage}
                      logged_in_user_id={logged_in_user_id}
                      setConfirmationOpen={setConfirmationOpen}
-                     setSelectedUser={setSelectedUser} sortTable={sortTable}/>
+                     setSelectedUser={setSelectedUser}
+                     sortTable={(column_name) => sortTable(column_name, sort, setSort)}/>
         <ConfirmDialog
           open={confirmationOpen}
           onClose={removeUser}

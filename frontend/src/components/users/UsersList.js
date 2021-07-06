@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import jwt_decode from "jwt-decode";
 import {UsersService} from "../../services/UsersService";
-import {typeWatch} from "../utils/general";
+import {sortTable, typeWatch} from "../utils/general";
 import {
   displayErrorNotifications,
   renderNotification
@@ -115,22 +115,6 @@ export const UsersList = () => {
     }, SEARCH_TIMEOUT);
   }
 
-  const sortTable = (sort_by) => {
-    if (sort === sort_by && sort_by === "full_name") {
-      sort_by = "-full_name"; // Reverse sorting order
-    } else if (sort === sort_by && sort_by === "-full_name") {
-      sort_by = "full_name"; // Reverse sorting order
-    }
-
-    if (sort === sort_by && sort_by === "token_status") {
-      sort_by = "-token_status"; // Reverse sorting order
-    } else if (sort === sort_by && sort_by === "-token_status") {
-      sort_by = "token_status"; // Reverse sorting order
-    }
-
-    setSort(sort_by);
-  }
-
   const onCloseAddUser = (addUser, token) => {
     setAddUserOpen(false)
     if (addUser && token) {
@@ -194,8 +178,9 @@ export const UsersList = () => {
         {areArgyleKeysExist() && (
           <UsersTable data={userList} count={paginationState.count}
                       loadNextPage={loadNextPage} loadPrevPage={loadPrevPage}
-                      deleteUser={deleteUser} sortTable={sortTable}/>
-        )}
+                      deleteUser={deleteUser}
+                      sortTable={(column_name) => sortTable(column_name, sort, setSort)}/>
+          )}
         <AddUserDialog
           open={addUserOpen}
           onClose={onCloseAddUser}

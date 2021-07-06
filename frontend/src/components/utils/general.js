@@ -53,3 +53,13 @@ export const typeWatch = function (callback, delay) {
     timer = setTimeout(callback, delay);
   }
 }();
+
+export const sortTable = (column_name, sort, setSort) => {
+  if (sort === column_name) {
+    setSort(`-${column_name}`);
+  } else if (sort === `-${column_name}`) {
+    setSort(null);
+  } else {
+    setSort(column_name);
+  }
+}
