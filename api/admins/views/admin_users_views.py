@@ -34,7 +34,7 @@ class CreateAdminUser(generics.CreateAPIView):
             raise MailException(error)
 
 
-class GetAdminUsers(generics.ListAPIView):
+class FetchAdminUsers(generics.ListAPIView):
     """
         Retrieves a list of AdminUsers.
         - - - - - - - - - -
@@ -61,6 +61,17 @@ class GetAdminUsers(generics.ListAPIView):
     queryset = AdminUser.objects.all().order_by('email')
     serializer_class = AdminUserListSerializer
     permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset()
+        sort = self.request.GET.get("sort")
+        search = self.request.GET.get("search")
+
+        if sort:
+            qs = qs.order_by(sort)
+        if search:
+            qs = qs.filter(email__icontains=search)
+        return qs
 
 
 class DeleteAdminUser(generics.DestroyAPIView):

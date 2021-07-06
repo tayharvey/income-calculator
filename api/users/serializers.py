@@ -98,7 +98,15 @@ class EmploymentSerializer(serializers.Serializer):
 
 class ProfileSerializer(serializers.Serializer):
     full_name = serializers.CharField()
-    birth_date = serializers.CharField()
+    birth_date = serializers.SerializerMethodField()
     email = serializers.CharField()
     phone_number = serializers.CharField()
     employer = serializers.CharField()
+
+    def get_birth_date(self, obj):
+        birth_date_str = obj.get("birth_date")
+        # Convert `birth_date` string to Datetime object
+        birth_date = datetime.datetime.strptime(birth_date_str, '%Y-%m-%d')
+
+        # Change date format
+        return birth_date.strftime("%B %d, %Y")

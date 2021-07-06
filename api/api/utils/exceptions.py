@@ -26,8 +26,8 @@ class ArgyleException(APIException):
 
 
 class ArgyleNoDataException(APIException):
-    status_code = 404
-    detail = "Non found profile data"
+    status_code = 400
+    detail = "Argyle Profile not found!"
 
     def __init__(self, message=''):
         self.detail = message if message else self.detail

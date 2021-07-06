@@ -1,15 +1,15 @@
 import datetime
-
+from api.utils.argyle_api import ArgyleAPIWrapper
+from api.utils.argyle_api_pagination import ArgyleApiPagination
+from api.utils.exceptions import ArgyleException
 from rest_auth import views
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.utils.argyle_api import ArgyleAPIWrapper
-from api.utils.argyle_api_pagination import ArgyleApiPagination
-from api.utils.exceptions import ArgyleException
 from .models import ArgyleUser
-from .serializers import ArgyleUserSerializer, ProfileSerializer, EmploymentSerializer, KeyMetricsSerializer
+from .serializers import ArgyleUserSerializer, ProfileSerializer, EmploymentSerializer, \
+    KeyMetricsSerializer
 from .services.income_metrics.key_metrics import MetricsService
 from .services.income_months.income_months_service import IncomeMonthService
 
@@ -71,6 +71,17 @@ class ArgyleUsersListCreate(generics.ListCreateAPIView):
     serializer_class = ArgyleUserSerializer
     queryset = ArgyleUser.objects.all()
     permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset()
+        sort = self.request.GET.get("sort")
+        search = self.request.GET.get("search")
+
+        if sort:
+            qs = qs.order_by(sort)
+        if search:
+            qs = qs.filter(full_name__icontains=search)
+        return qs
 
     def create(self, request, *args, **kwargs):
         data = request.data
@@ -207,18 +218,20 @@ class KeyMetricsList(generics.ListAPIView):
 
         employments = argyle_wrapper.get_all_employments(user_id)
 
-        last_year_payouts = argyle_wrapper.get_all_payouts(user_id, from_start_date=datetime.date(previous_year, 1, 1),
-                                                           to_start_date=datetime.date(previous_year, 12, 31))
+        last_year_payouts = argyle_wrapper.get_all_payouts(
+                                        user_id, from_start_date=datetime.date(previous_year, 1, 1),
+                                                to_start_date=datetime.date(previous_year, 12, 31))
 
         current_year_payouts = argyle_wrapper.get_all_payouts(user_id,
-                                                              from_start_date=datetime.date(current_year, 1, 1),
-                                                              to_start_date=datetime.date.today())
+                                                  from_start_date=datetime.date(current_year, 1, 1),
+                                                  to_start_date=datetime.date.today())
 
         metrics = MetricsService(last_year_payouts, current_year_payouts, employments)
         month_metrics = IncomeMonthService(last_year_payouts, current_year_payouts)
 
         response_data = {"income_metrics": metrics.get_metrics(),
-                         "month_metrics": month_metrics.convert_to_chart_values(month_metrics.get_metrics())}
+                         "month_metrics": month_metrics.convert_to_chart_values(
+                             month_metrics.get_metrics())}
 
         return Response(response_data, status=views.status.HTTP_200_OK)
 
