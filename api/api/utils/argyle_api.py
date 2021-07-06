@@ -1,12 +1,12 @@
 import base64
 import os
-
 import requests
-
-from api import settings
 from api.utils.exceptions import ArgyleException
 from api.utils.exceptions import ArgyleIntegration
+from api.utils.exceptions import ArgyleNoDataException
 from api_keys.models import ArgyleAPIKeys
+
+from api import settings
 
 BASE_URL = os.environ['BASE_URL']
 
@@ -73,8 +73,8 @@ class ArgyleAPIWrapper:
 
         while exist_next_page:
 
-            response = requests.get(url, headers=self.get_headers(), params={**params, 'limit': limit,
-                                                                             'offset': offset})
+            response = requests.get(url, headers=self.get_headers(),
+                                    params={**params, 'limit': limit, 'offset': offset})
             data = response.json()
 
             if response.status_code == 400:
@@ -89,7 +89,8 @@ class ArgyleAPIWrapper:
 
         return results
 
-    def get_all_payouts_by_company_and_date(self, user_id, from_start_date=None, to_start_date=None, employer=None,
+    def get_all_payouts_by_company_and_date(self, user_id, from_start_date=None, to_start_date=None,
+                                            employer=None,
                                             limit=100):
         """
         Lists all payouts.
