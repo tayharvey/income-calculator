@@ -1,0 +1,83 @@
+.MuiCard-root {
+  overflow: visible;
+}
+
+.MuiDrawer-paper {
+  background: none !important;
+  border-right: none !important;
+}
+
+.MuiPaper-elevation1 {
+  box-shadow: 0 1px 1px #E0E5EC, 0 5px 6px rgba(164, 170, 178, 0.17) !important;
+}
+
+.MuiInputLabel-outlined.MuiInputLabel-shrink {
+  transform: translate(14px, -9px) scale(0.75) !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: #D5DCE7 !important;
+}
+
+.MuiOutlinedInput-input {
+  padding: 18px 15px;
+}
+
+.MuiButton-contained {
+  box-shadow: none !important;
+}
+
+.MuiButton-contained.Mui-disabled {
+  background-color: #b3b2ff !important;
+  color: white !important;
+}
+
+.MuiButton-containedPrimary {
+  background-color: #6563FF !important;
+  padding: 6px 36px !important;
+  height: 40px;
+}
+
+.MuiButton-containedSecondary {
+  background-color: #E72842 !important;
+  padding: 6px 36px !important;
+  height: 40px;
+}
+
+.MuiTypography-colorPrimary {
+  color: #6563FF !important;
+}
+
+.MuiTypography-h5 {
+  color: #4C4F56 !important;
+  margin: 1em 0 0.5em !important
+}
+
+/* Custom Table Styles */
+.MuiTable-root th {
+  padding: 25px 15px 25px 20px !important;
+  color: #4C4F56 !important;
+  cursor: pointer;
+}
+
+.MuiTable-root td:not(.action-cell) {
+  padding: 15px 15px 15px 20px !important;
+  color: #4C4F56 !important;
+}
+
+.MuiTableCell-head {
+  padding: 25px 15px !important;
+  line-height: 1 !important;
+}
+
+th.MuiTableCell-head {
+  color: #4C4F56 !important;
+  text-transform: uppercase;
+  font-size: 8.5pt;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.MuiTablePagination-actions {
+  margin-left: 10px !important;
+}

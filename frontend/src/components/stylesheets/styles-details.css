@@ -1,30 +1,41 @@
+.tile {
+  background: #ffffff;
+  box-shadow: 0 1px 1px #e0e5ec, 0 5px 6px #a4aab22b;
+  border-radius: 6px;
+  margin-bottom: 1em;
+}
+
+.personal-info {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px !important;
+}
+
 .no-wrap {
   white-space: nowrap;
 }
 
 .font-bold {
   font-weight: bold !important;
+  font-size: 18px;
+  color: #4C4F56;
 }
 
 .font-size-mini {
-  font-size: 12px;
+  font-size: 9pt;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 0.7em;
 }
 
 .font-size-large {
-  font-size: 24px;
+  font-size: 19pt;
 }
 
 .vertical-squeeze {
   line-height: 22px;
   white-space: nowrap;
-}
-
-.text-align-center {
-  text-align: center;
-}
-
-.float-right {
-  float: right;
 }
 
 .spacing {
@@ -40,12 +51,21 @@
   width: 20px;
 }
 
-.collapsable-table-container tr.MuiTableRow-root td {
-  background-color: #eff1f5;
+.expandable-row {
+  cursor: pointer;
 }
 
-tr.MuiTableRow-root:last-child td {
-  border-bottom: none !important;
+.collapsable-row {
+  display: table-row;
+  opacity: 1;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+  -webkit-transition: display .3s linear, opacity .3s linear;
+  transition: display .3s linear, opacity .3s linear;
+}
+
+.collapsable-table-container tr.MuiTableRow-root td {
+  background-color: #eff1f5;
 }
 
 .small-table-head, .small-table-row {
@@ -53,11 +73,15 @@ tr.MuiTableRow-root:last-child td {
 }
 
 .small-table-head:first-child, .small-table-row:first-child {
-  padding-left: 0 !important;
+  padding-left: 20px !important;
 }
 
-.small-table-head, .small-table-row {
+.small-table-row {
   font-size: 14px !important;
+}
+
+.action-cell {
+  padding-left: 0 !important;
 }
 
 .smaller-font {
@@ -70,10 +94,6 @@ tr.MuiTableRow-root:last-child td {
 
 .padding-left-35 {
   padding-left: 35px !important;
-}
-
-.container-title {
-  padding: 20px 0;
 }
 
 .expand-col {
@@ -91,6 +111,7 @@ tr.MuiTableRow-root:last-child td {
 }
 
 .details-container {
+  color: #4C4F56;
   padding: 10px;
 }
 

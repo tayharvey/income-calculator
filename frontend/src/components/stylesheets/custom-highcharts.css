@@ -1,0 +1,10 @@
+.custom-tooltip {
+  display: block;
+  padding: 16px;
+  background: #FFFFFF;
+  box-shadow: 0 1px 3px #e0e5ec, 0 5px 6px #a4aab22b;
+  border: 1px solid #f6f6f6;
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 1.3;
+}

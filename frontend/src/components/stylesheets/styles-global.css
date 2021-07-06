@@ -1,10 +1,97 @@
 body {
-  background-color: #eff1f5;
-  font-family: Roboto, Helvetica, Arial;
+  background-color: #F2F6F9;
+  font-family: "Inter";
+  margin: 25px;
+}
+
+a {
+  color: #6563FF;
+  text-decoration: none !important;
+}
+
+.login-background {
+  width: 100vw;
+  height: 100vh;
+  background: url("/src/images/banner-bg.svg") no-repeat center;
+  background-size: 100% 100%;
+}
+
+.button {
+  cursor: pointer;
+  display: flex;
+}
+
+.button > svg {
+  padding: 14px 0;
+}
+
+::placeholder {
+  color: #6E788F !important;
+  opacity: 1 !important; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #6E788F !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #6E788F !important;
+}
+
+.flex {
+  width: 100%;
+  display: flex !important;
+  align-items: center;
+}
+
+.flex-right {
+  margin-left: auto;
+}
+
+.initials, .purple-initials {
+  width: 43px;
+  height: 43px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #F2F6F9;
+  border-radius: 50%;
+  color: #6E788F;
+  margin-right: 15px;
+}
+
+.purple-initials {
+  background: #6563FF;
+  color: white;
+}
+
+.table-th-centered {
+  display: flex;
+  align-items: center;
+}
+
+.table-th-centered > svg {
+  margin-left: 5px;
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .line-break {
   white-space: pre-line;
+}
+
+.link-center {
+  justify-content: center;
+  display: flex;
+  color: #6563FF !important;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .page-content-wrapper {
@@ -12,41 +99,37 @@ body {
 }
 
 .spinner-container {
-  height: 40px; /* prevents vertical expansion when CircularProgress component is rendered inside */
+  height: 42px; /* prevents vertical expansion when CircularProgress component is rendered inside */
 }
 
-.center-flex-container {
+.total-metric {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  background-color: #ffffff !important;
+  align-items: flex-start;
   box-sizing: border-box;
   min-height: 60px;
-  border-radius: 5px;
-  border: 1px solid #e6e6e6;
   overflow: hidden;
-  padding: 5px;
-  margin-bottom: 10px;
+  padding: 1.3em;
+}
+
+.total-metric:first-child {
+  border-right: 1px solid #E9EEF4;
 }
 
 .basic-container {
   position: relative;
-  background-color: #ffffff !important;
   box-sizing: border-box;
   line-height: 50px; /* Must equal height to center vertically */
   min-height: 50px;
   border-radius: 5px;
-  border: 1px solid #e6e6e6;
   overflow: hidden;
-
-  padding-bottom: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 1em;
+  padding: 0 !important;
 }
 
-.small-container {
-  height: 60px;
-  line-height: 60px;
+.basic-container .MuiTypography-h5 {
+  padding: 0 20px;
 }
 
 .vertical-center {
@@ -58,8 +141,6 @@ body {
 
 .back-icon-container {
   position: relative;
-  background-color: #eff1f5;
-  margin-right: 24px;
   height: 60px;
   width: 50px;
   float: left;
@@ -80,14 +161,8 @@ body {
   padding-bottom: 10px;
 }
 
-
 .height-0 {
   height: 0;
-}
-
-
-.width-100 {
-  width: 100%
 }
 
 .large-paper-container {
@@ -97,15 +172,8 @@ body {
 }
 
 .medium-paper-container {
-  width: 924px;
-  padding: 20px 40px 5px 40px;
   margin: 40px auto;
-
-}
-
-.table-container {
-  margin: 10px 0;
-
+  position: relative;
 }
 
 .table-row:hover {
@@ -118,7 +186,6 @@ body {
 }
 
 .users-table-head {
-  padding: 22px 16px !important;
   font-weight: bold !important;
 }
 
@@ -131,16 +198,24 @@ body {
   gap: 20px;
 }
 
-.float-right {
-  float: right;
+.align-right {
+  position: absolute !important;
+  right: 30px;
+  top: 14px;
 }
 
 .column {
-  padding: 10px 10px 30px 0;
+  padding: 10px 0 30px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.column-buttons {
+  padding-bottom: 0;
+  gap: 15px;
+  width: 100%;
 }
 
 .close-btn {
@@ -159,26 +234,16 @@ body {
 
 .MuiDialogTitle-root.dialog-title .MuiTypography-h6 {
   font-weight: bold;
+  line-height: 1.5;
 }
 
 .MuiDialogTitle-root.dialog-title.red-title .MuiTypography-h6 {
   font-weight: bold;
-  color: red !important;
+  color: #ff2626 !important;
 }
 
 button {
   text-transform: none !important;
-}
-
-.MuiButton-contained.blue-button {
-  background-color: var(--blue-color);
-  color: white;
-}
-
-.MuiButton-contained.alternate-blue-btn, .MuiButton-contained.alternate-blue-btn:hover {
-  color: var(--blue-color);
-  background: #eef2fc;
-
 }
 
 .MuiButton-contained.red-button {
@@ -191,10 +256,15 @@ button {
 
 }
 
+.gray-input {
+  background-color: #E9EEF4;
+  border-radius: 5px;
+  padding: 6px 18px;
+}
+
 .full-width-input {
   width: 85%;
 }
-
 
 .medium-width-input {
   width: 80%;
@@ -204,9 +274,8 @@ button {
   margin-top: 20px;
 }
 
-
 .medium-width-modal {
-  width: 550px !important;
+  width: 450px !important;
   margin: auto;
   padding-bottom: 0;
 }
@@ -249,7 +318,7 @@ button {
 }
 
 .padded-input {
-  padding: 10px 0;
+  padding: 15px 0;
   width: 100%;
 }
 
@@ -347,8 +416,4 @@ button {
     padding-top: 50px;
     text-align: center;
   }
-}
-
-.users-table > .MuiTableCell-root.MuiTableCell-body{
-  padding: 0 16px !important;
 }

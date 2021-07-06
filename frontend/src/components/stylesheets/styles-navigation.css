@@ -13,19 +13,21 @@
 
 .navbar-link {
   padding: 10px 30px 10px 15px;
-  text-decoration: none;
-  color: gray;
+  color: #6E788F;
   font-size: 15px;
-  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .navbar-link.active {
-  color: black;
+  color: #6563FF;
 }
 
 .menu-container.MuiList-root {
-  margin-top: 35px;
-  width: 11vw;
+  margin-top: 20px;
+  width: 200px;
+  height: 100%;
+  position: relative;
+  padding: 0 1em;
 }
 
 .padded-divider.MuiDivider-root {
