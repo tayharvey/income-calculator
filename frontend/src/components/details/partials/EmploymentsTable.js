@@ -4,8 +4,11 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableContainer,
+  TableFooter,
+  TableHead,
+  TablePagination,
   TableRow,
-  TableHead, TablePagination, TableFooter, TableContainer,
 } from '@material-ui/core'
 import {PAGE_LIMIT} from "../../../consts";
 import {ReactComponent as Sort} from "../../../icons/sort.svg";
@@ -16,8 +19,21 @@ export const EmploymentsTable = ({
                                    data, count, loadNextPage,
                                    loadPrevPage,
                                  }) => {
-
   const [page, setPage] = useState(0);
+
+  let employments = [
+    {name: "Employer", dataKey: "employer"},
+    {name: "Employer Address", dataKey: "employer_address"},
+    {name: "Job Title", dataKey: "job_title"},
+    {name: "Division", dataKey: "job_title"},
+    {name: "Job Type", dataKey: "job_type"},
+    {name: "Base Pay Rate", dataKey: "base_pay"},
+    {name: "Pay Period End Date", dataKey: "pay_period_end_date"},
+    {name: "Hire Date", dataKey: "hire_date"},
+    {name: "Separation Date", dataKey: "termination_date"},
+    {name: "Termination Date", dataKey: "termination_date"},
+    {name: "Termination Reason", dataKey: "termination_reason"}
+  ];
 
   const onChangePage = (e, newPage) => {
     if (newPage > page) {
@@ -28,98 +44,48 @@ export const EmploymentsTable = ({
     setPage(newPage);
   }
 
-  const formatData = (data) => {
-    return data ? data : <Empty/>;
+  const formatData = (record, dataKey) => {
+    if (dataKey === "pay_period_end_date" || dataKey === "hire_date" || dataKey === "termination_date") {
+      record = formatDate(record);
+    } else if (dataKey === "base_pay") {
+      record = formatRate(record);
+    }
+
+    if (!record) {
+      return <Empty/>;
+    } else {
+      return record;
+    }
   }
 
   return (
-    <TableContainer style={{}}>
+    <TableContainer>
       <Table className="border-top-gray" style={{width: 1200}}>
         <TableHead>
           <TableRow className='table-head-row'>
-            <TableCell className="small-table-head">
-              <div className="table-th-centered">
-                Employer <Sort/>
-              </div>
-            </TableCell>
-            <TableCell className="small-table-head">
-              <div className="table-th-centered">
-                Employer Address <Sort/>
-              </div>
-            </TableCell>
-            <TableCell className="small-table-head">
-              <div className="table-th-centered">
-                Job Title <Sort/>
-              </div>
-            </TableCell>
-            <TableCell className="small-table-head">
-              <div className="table-th-centered">
-                Division <Sort/>
-              </div>
-            </TableCell>
-            <TableCell className="small-table-head">
-              <div className="table-th-centered">
-                Job Type <Sort/>
-              </div>
-            </TableCell>
-            <TableCell className="small-table-head">
-              <div className="table-th-centered">
-                Base Pay Rate <Sort/>
-              </div>
-            </TableCell>
-            <TableCell className="small-table-head">
-              <div className="table-th-centered">
-                Pay Period End Date <Sort/>
-              </div>
-            </TableCell>
-            <TableCell className="small-table-head">
-              <div className="table-th-centered">
-                Hire Date <Sort/>
-              </div>
-            </TableCell>
-            <TableCell className="small-table-head">
-              <div className="table-th-centered">
-                Separation Date <Sort/>
-              </div>
-            </TableCell>
-            <TableCell className="small-table-head">
-              <div className="table-th-centered">
-                Termination Date <Sort/>
-              </div>
-            </TableCell>
-            <TableCell className="small-table-head">
-              <div className="table-th-centered">
-                Termination Reason <Sort/>
-              </div>
-            </TableCell>
+            {employments.map(employment => (
+              <TableCell className="small-table-head">
+                <div className="table-th-centered">
+                  {employment.name} <Sort/>
+                </div>
+              </TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map(element => {
-            return <TableRow key={element.id}>
-              <TableCell
-                className="small-table-row">{formatData(element.employer)}</TableCell>
-              <TableCell
-                className="small-table-row">{formatData(element.employer_address)}</TableCell>
-              <TableCell
-                className="small-table-row">{formatData(element.job_title)}</TableCell>
-              <TableCell
-                className="small-table-row">{formatData(element.job_title)}</TableCell>
-              <TableCell
-                className="small-table-row">{formatData(element.job_type)}</TableCell>
-              <TableCell
-                className="small-table-row">{formatData(formatRate(element.base_pay))}</TableCell>
-              <TableCell
-                className="small-table-row">{formatData(formatDate(element.pay_period_end_date))}</TableCell>
-              <TableCell
-                className="small-table-row no-wrap">{formatData(formatDate(element.hire_date))}</TableCell>
-              <TableCell
-                className="small-table-row no-wrap">{formatData(formatDate(element.termination_date))}</TableCell>
-              <TableCell
-                className="small-table-row no-wrap">{formatData(formatDate(element.termination_date))}</TableCell>
-              <TableCell
-                className="small-table-row">{formatData(element.termination_reason)}</TableCell>
-            </TableRow>
+          {data.map(row => {
+            return (
+              <TableRow key={row.id}>
+                {employments.map(employment => {
+                  const key = employment.dataKey;
+                  return (
+                    <TableCell className="small-table-row">
+                      {formatData(row[key], key)}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            )
           })}
         </TableBody>
         <TableFooter>
