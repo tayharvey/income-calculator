@@ -124,8 +124,8 @@ export const CALCULATION_TOOLTIPS = {
     "projected_total": "YTD value * 12 / current month",
     "companies": {
       "last_year_total": total_days("Termination date"),
-    "ytd_total": total_days("Today"),
-    "projected_total": "YTD value * 12 / current month",
+      "ytd_total": total_days("Today"),
+      "projected_total": "YTD value * 12 / current month",
     }
   },
   "pay_frequency": {

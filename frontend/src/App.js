@@ -7,7 +7,9 @@ import {Logout} from "./components/auth/AuthLogout"
 import {PasswordUpdate} from './components/auth/AuthPasswordUpdate';
 import 'react-notifications-component/dist/theme.css'
 import './components/stylesheets/styles-global.css'
-import {AdminUserList} from "./components/adminList/AdminUserList";
+import './components/stylesheets/custom-mui.css'
+import './components/stylesheets/custom-highcharts.css'
+import {AdminUserList} from "./components/admins/AdminUserList";
 import {LeftNavBar} from "./components/navbar/LeftNavBar";
 import {AccountActivate} from "./components/auth/AccountActivate";
 import {LandingPage} from "./components/home/LandingPage";
@@ -23,21 +25,17 @@ const RouteComponent = ({
                           displayNav = false
                         }) => {
 
-  return <div>
+  return (
     <Route path={path} exact={exact}>
-
       {displayNav && <LeftNavBar/>}
-      <div>
-        {children}
-      </div>
+      {children}
     </Route>
-  </div>
+  );
 }
 
 const App = () => {
-
   return (
-    <>
+    <div className="container">
       <ReactNotification/>
       <Router>
         <Switch>
@@ -58,7 +56,9 @@ const App = () => {
           </RouteComponent>
           <RouteComponent validateToken={false}
                           path="/auth/login/">
-            <Login/>
+            <div className="container-center">
+              <Login/>
+            </div>
           </RouteComponent>
           <RouteComponent validateToken={false}
                           path="/auth/password-reset/">
@@ -77,8 +77,7 @@ const App = () => {
           </RouteComponent>
         </Switch>
       </Router>
-    </>
-  )
-
+    </div>
+  );
 }
 export default App;

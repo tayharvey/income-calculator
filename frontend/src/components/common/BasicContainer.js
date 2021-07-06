@@ -3,11 +3,10 @@ import {Container} from '@material-ui/core'
 
 export const BasicContainer = ({extraCssClass, children}) => {
 
-  return <Container
-    className={`basic-container ${extraCssClass ? extraCssClass : ''}`}
-  >
-    <div className="width-100">
+  return (
+    <Container maxWidth="false"
+      className={`basic-container ${extraCssClass ? extraCssClass : ''}`}>
       {children}
-    </div>
-  </Container>
+    </Container>
+  );
 }
