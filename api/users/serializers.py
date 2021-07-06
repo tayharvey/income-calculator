@@ -9,19 +9,16 @@ from .models import ArgyleUser
 
 
 class ArgyleUserSerializer(serializers.ModelSerializer):
-    token_status = serializers.CharField(source='get_token_status', read_only=True)
-    full_name = serializers.SerializerMethodField(read_only=True)
+    token_status = serializers.CharField(read_only=True)
+    full_name = serializers.CharField(read_only=True)
 
     class Meta:
         model = ArgyleUser
         fields = '__all__'
 
-    def get_full_name(self, obj):
-        return f'{obj.first_name} {obj.last_name}'
-
 
 class KeyMetricsSerializer(serializers.Serializer):
-    token_status = serializers.CharField(source='get_token_status', read_only=True)
+    token_status = serializers.CharField(read_only=True)
 
     class Meta:
         fields = '__all__'
