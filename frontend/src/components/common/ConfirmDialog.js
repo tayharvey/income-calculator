@@ -26,21 +26,22 @@ export const ConfirmDialog = (props) => {
         <IconButton className="close-btn" onClick={() => handleClose()}>
           <CloseIcon/>
         </IconButton>
-        <DialogTitle className={"dialog-title"}>{title}</DialogTitle>
-        <div className="row">
+        <DialogTitle className={"dialog-title"}>
+          Are you sure you want<br/>
+          to delete this account?
+        </DialogTitle>
+        <div className="column column-buttons">
           <Button
+            className="medium-width-input"
             variant="contained"
-            className={'blue-button'}
+            color="secondary"
             onClick={() => handleClose(true)}
           >
-            Confirm
+            Delete
           </Button>
           <Button
-            variant="contained"
-            color="default"
-            className="alternate-blue-btn"
-            onClick={() => handleClose(false)}
-          >
+            className="medium-width-input"
+            onClick={() => handleClose(false)}>
             Cancel
           </Button>
         </div>

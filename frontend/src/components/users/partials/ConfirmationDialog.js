@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import Paper from "@material-ui/core/Paper";
 import {DialogTitle, IconButton,} from "@material-ui/core";
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from "@material-ui/icons/Close";
 
 export const ConfirmationDialog = ({
                                      onClose,
@@ -18,8 +18,8 @@ export const ConfirmationDialog = ({
     onClose(redirect);
   };
 
-  const splitText = (text) =>{
-    return  text.split('\n').map(str =><div key={str}>{str}</div>)
+  const splitText = (text) => {
+    return text.split("\n").map(str => <div key={str}>{str}</div>)
   }
 
   return (
@@ -28,25 +28,22 @@ export const ConfirmationDialog = ({
         <IconButton className="close-btn" onClick={() => handleClose()}>
           <CloseIcon/>
         </IconButton>
-        <DialogTitle className={success ? 'dialog-title' : 'dialog-title red-title'}>
+        <DialogTitle className={success ? "dialog-title" : "dialog-title red-title"}>
           {splitText(message)}
         </DialogTitle >
-        <div className='row'>
+        <div className="column column-buttons">
           <Button
-            className={'blue-button'}
+            className="medium-width-input"
             variant="contained"
             color="primary"
+            onClick={() => handleClose(true)}>
+            {rightBtnText}
+          </Button>
+          <Button
+            className="medium-width-input"
             onClick={() => handleClose(false)}
           >
             Return To Dashboard
-          </Button>
-          <Button
-            className={success ? "alternate-blue-btn" : 'alternate-red-btn'}
-            variant="contained"
-            color="primary"
-            onClick={() => handleClose(true)}
-          >
-            {rightBtnText}
           </Button>
         </div>
       </Paper>

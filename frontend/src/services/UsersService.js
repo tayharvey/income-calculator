@@ -3,12 +3,12 @@ import {PAGE_LIMIT} from "../consts";
 
 export class UsersService {
 
-  static fetchUsersList = (limit = PAGE_LIMIT, offset = 0) => {
-    return api.get(`${API_URL}/users/`, {params: {limit, offset}})
+  static fetchUsersList = (sort = null, search = null, limit = PAGE_LIMIT, offset = 0) => {
+    return api.get(`${API_URL}/users/`, {params: {sort, search, limit, offset}})
   }
 
-  static fetchUsersListByUrl = (url) => {
-    return api.get(url)
+  static fetchUsersListByUrl = (url, sort = null, search = null) => {
+    return api.get(url, {params: {sort, search}})
   }
 
   static createUser = (data) => {

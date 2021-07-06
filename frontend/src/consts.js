@@ -18,7 +18,9 @@ export const PAGINATION_INITIAL_STATE = {
   previous: ''
 }
 
-export const PAGE_LIMIT = 3
+export const PAGE_LIMIT = 9;
+
+export const SEARCH_TIMEOUT = 700; // milliseconds
 
 export const API_KEYS_INITIAL_STATE = {
   client_id: '',
