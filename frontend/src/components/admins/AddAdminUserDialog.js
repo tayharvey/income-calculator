@@ -34,8 +34,10 @@ export const AddAdminUserDialog = (props) => {
 
         <TextField
           className='grey-font full-width-input medium-width-input'
-          placeholder="Enter email"
+          placeholder="Enter Email"
           id="email"
+          variant="outlined"
+          size="small"
           value={email}
           error={!!errors.email}
           helperText={errors.email}
@@ -44,18 +46,16 @@ export const AddAdminUserDialog = (props) => {
             handleClose(true)
           })}
         />
-        <div className='margin-top-20'>
-          <Button
-            variant="contained"
-            className="blue-btn"
-            color="primary"
-
-            disabled={!email}
-            onClick={() => handleClose(true)}
-          >
-            Submit
-          </Button>
-        </div>
+        <Button
+          variant="contained"
+          className="medium-width-input"
+          style={{marginTop: 20}}
+          color="primary"
+          disabled={!email}
+          onClick={() => handleClose(true)}
+        >
+          Submit
+        </Button>
       </Paper>
     </Dialog>
   );
