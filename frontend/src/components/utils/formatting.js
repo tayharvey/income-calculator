@@ -18,3 +18,7 @@ export const formatRate = (value) => {
   return "$" + value + '/hr'
 }
 
+export const formatPhoneNumber = (phone_number) => {
+  return phone_number.slice(0, 2) + " " + phone_number.slice(2, 5) +
+    " " + phone_number.slice(5, 8) + " " + phone_number.slice(8, 12);
+}
