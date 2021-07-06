@@ -1,90 +1,147 @@
-import {Box, Button, Divider, Typography} from "@material-ui/core";
+import {Button, Card, Grid} from "@material-ui/core";
 import React from "react";
-import {useHistory} from "react-router-dom";
+import {TopNavBar} from "./TopNavBar";
+import "../stylesheets/styles-landing-page.css";
+import {ReactComponent as Next} from "../../icons/next.svg";
+import {ReactComponent as RightArrowWhite} from "../../icons/right-arrow-white.svg";
+import Laptop from "../../images/laptop.png";
+import HistoricalIncomeSummary
+  from "../../images/historical-income-summary.png";
+import FutureIncomeProjections
+  from "../../images/future-income-projections.png";
+import InstantDecisioningLogic
+  from "../../images/instant-decisioning-logic.png";
+import ReduceDevelopmentTime from "../../images/reduce-development-time.png";
+import {Footer} from "./Footer";
+
 
 export const LandingPage = () => {
+  document.body.style.backgroundColor = "white";
+  document.body.style.margin = "0";
 
-  const history = useHistory()
+  return (
+    <>
+      <TopNavBar/>
 
-  const redirectToLogin = () => {
-    history.push('/auth/login')
-  }
-  return <Box className='homepage-container'>
+      <Grid container className="banner">
+        <Grid item xs={12} sm={12} md={5} className="banner-headline">
+          <span className="title">
+            Argyle Calculator
+          </span>
+          <span className="sub-title">
+            Leverage Argyle’s calculator to get a holistic picture of your
+            customers’ past income and projected earnings.
+          </span>
+          <a href="/auth/login">
+            <Button
+              variant="contained"
+              color="primary">
+              Log In to Argyle Calculator
+              <RightArrowWhite style={{marginLeft: 10}}/>
+            </Button>
+          </a>
+        </Grid>
+        <Grid item xs={12} sm={12} md={7}>
+          <img src={Laptop} style={{width: "100%"}}/>
+        </Grid>
+      </Grid>
 
-    <div className="logo-box">
-      <img src='/assets/argyle.svg' width={90}/>
-    </div>
-    <Box className='shadowed-box under-logo margin-bottom-30'>
-      <Typography variant={'h5'} className='box-header'>Argyle
-        Calculator</Typography>
-      <Divider className='box-divider'/>
-      <Typography variant={'h6'} className='box-text'>
-        The app is the quickest way to connect, verify and control employment
-        data
-        from Argyle API. The Admin can log in to the app and add employers that
-        he
-        wants to control.
-        The new employer can be added by providing his Argyle token.
-        After adding the new employer, the admin can retrieve information about
-        a
-        given User, and view data visualizations/calculations on the User's
-        Argyle
-        data.</Typography>
-    </Box>
+      <div className="tutorial">
+        <span className="sub-headline">
+          Add users
+        </span>
+        <Next/>
+        <span className="sub-headline">
+          Visualize their income metrics & employment history
+        </span>
+        <Next/>
+        <span className="sub-headline">
+          Project future income
+        </span>
+        <Next/>
+        <span className="sub-headline">
+          Conduct calculations<br/> on their data
+        </span>
+      </div>
 
-    <Box className='shadowed-box margin-bottom-30'>
-      <img src='/assets/chart.png' style={{width: '100%'}}/>
-    </Box>
-    <Box className='inline-boxes-container margin-bottom-30'>
-      <Box className='shadowed-box'>
-        <Typography variant={'h5'} className='box-header'>Lorem ipsum
-          1</Typography>
-        <Divider className='box-divider'/>
+      <div className="features">
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <Card className="card">
+              <div className="card-left">
+                  <span className="headline">
+                    Earnings overview
+                  </span>
+                <span className="margin-top-25 sub-headline">
+                    Calculator allows an underwriting agent to get a picture of
+                    a person’s consolidated earnings history in a single view.
+                  </span>
+              </div>
+              <div className="card-right">
+                <img src={HistoricalIncomeSummary} alt=""/>
+              </div>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card className="card">
+              <div className="card-left">
+                  <span className="headline">
+                    Income forecast
+                  </span>
+                <span className="margin-top-25 sub-headline">
+                    Project future income from historical data. Instantly calculate income amounts, ratios and time employed.
+                  </span>
+              </div>
+              <div className="card-right">
+                <img src={FutureIncomeProjections} alt=""/>
+              </div>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card className="card">
+              <div className="card-left">
+                  <span className="headline">
+                    Quicker decisions
+                  </span>
+                <span className="margin-top-25 sub-headline">
+                    Instantly make underwriting decisions without the hassle of coding calculations yourself.
+                  </span>
+              </div>
+              <div className="card-right">
+                <img src={InstantDecisioningLogic} alt=""/>
+              </div>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card className="card">
+              <div className="card-left">
+                  <span className="headline">
+                    Less dev time
+                  </span>
+                <span className="margin-top-25 sub-headline">
+                    Take a load of your engineering team with this pre-built solution.
+                  </span>
+              </div>
+              <div className="card-right">
+                <img src={ReduceDevelopmentTime} alt=""/>
+              </div>
+            </Card>
+          </Grid>
+        </Grid>
 
-        <Typography variant={'h6'} className='box-text'>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut..</Typography>
-      </Box>
-      <Box className='shadowed-box'>
-        <Typography variant={'h5'} className='box-header'>Lorem ipsum
-          2</Typography>
-        <Divider className='box-divider'/>
+        <Grid container>
+          <a href="/auth/login" style={{margin: "4em auto"}}>
+            <Button
+              variant="contained"
+              color="primary">
+              Log In to Argyle Calculator
+              <RightArrowWhite style={{marginLeft: 10}}/>
+            </Button>
+          </a>
+        </Grid>
 
-        <Typography variant={'h6'} className='box-text'>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut .</Typography>
-      </Box>
-      <Box className='shadowed-box'>
-        <Typography variant={'h5'} className='box-header'>Lorem ipsum
-          3</Typography>
-        <Divider className='box-divider'/>
-
-        <Typography variant={'h6'} className='box-text'>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut </Typography>
-      </Box>
-      <Box className='shadowed-box'>
-        <Typography variant={'h5'} className='box-header'>Lorem ipsum
-          3</Typography>
-        <Divider className='box-divider'/>
-
-        <Typography variant={'h6'} className='box-text'>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut .</Typography>
-      </Box>
-    </Box>
-    <div className="">
-      <Button
-        variant="contained"
-        color="primary"
-        className="homepage-login-btn"
-        type="submit"
-        fullWidth
-        onClick={redirectToLogin}
-      >
-        Log In to Argyle Calculator
-      </Button>
-    </div>
-
-  </Box>
+        <Footer/>
+      </div>
+    </>
+  );
 }
