@@ -1,9 +1,7 @@
-import {Button, Paper} from "@material-ui/core";
+import {Button, Container, Paper} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import {addAPIKey, getAPIKeys} from "../../services/SettingService";
 import {
   displayErrorNotifications,
@@ -13,6 +11,7 @@ import {onEnterPressed} from "../utils/general";
 import "../stylesheets/styles-api-keys.css";
 import Typography from "@material-ui/core/Typography";
 import {API_KEYS_INITIAL_STATE} from "../../consts";
+import {CustomSwitch} from "../common/Switch";
 
 export const ArgyleAPIKeys = () => {
 
@@ -68,69 +67,77 @@ export const ArgyleAPIKeys = () => {
 
   const {client_id, client_secret, plugin_key, is_sandbox_mode} = inputForm
 
-  return <Paper className="medium-paper-container">
+  return (
+    <Container maxWidth="md">
+      <Paper className="medium-paper-container">
 
-    <div className="paper-child-container">
-      <Typography variant='h6'>Set Argyle API credentials</Typography>
-      <div className='padded-input'>
+        <div className="paper-child-container">
+          <Typography variant="h5">
+            API Keys
+          </Typography>
 
-        <TextField
-          value={plugin_key}
-          name='plugin_key'
-          label='plugin_key'
-          onChange={updateFormState}
-          onKeyPress={(evt) => onEnterPressed(evt, saveChanges)}
-          required
-          error={!!errorState.plugin_key}
-          helperText={errorState.plugin_key}
-          variant={'standard'}
-          fullWidth
-        /></div>
-      <div className='padded-input'>
-        <TextField
-          value={client_id}
-          name='client_id'
-          label='client_id'
-          onChange={updateFormState}
-          onKeyPress={(evt) => onEnterPressed(evt, saveChanges)}
-          required
-          error={!!errorState.client_id}
-          helperText={errorState.client_id}
-          fullWidth
+          <div className='padded-input'>
+            <TextField
+              value={plugin_key}
+              name='plugin_key'
+              label='plugin_key'
+              size="small"
+              onChange={updateFormState}
+              onKeyPress={(evt) => onEnterPressed(evt, saveChanges)}
+              required
+              error={!!errorState.plugin_key}
+              helperText={errorState.plugin_key}
+              variant='outlined'
+              fullWidth
+            /></div>
+          <div className='padded-input'>
+            <TextField
+              value={client_id}
+              name='client_id'
+              label='client_id'
+              size="small"
+              onChange={updateFormState}
+              onKeyPress={(evt) => onEnterPressed(evt, saveChanges)}
+              required
+              error={!!errorState.client_id}
+              helperText={errorState.client_id}
+              variant='outlined'
+              fullWidth
+            />
+          </div>
+          <div className='padded-input'>
+            <TextField
+              value={client_secret}
+              name='client_secret'
+              label='client_secret'
+              size="small"
+              onChange={updateFormState}
+              onKeyPress={(evt) => onEnterPressed(evt, saveChanges)}
+              required
+              error={!!errorState.client_secret}
+              helperText={errorState.client_secret}
+              variant='outlined'
+              fullWidth
+            />
+          </div>
 
-        />
-      </div>
-      <div className='padded-input'>
-        <TextField
-          value={client_secret}
-          name='client_secret'
-          label='client_secret'
-          onChange={updateFormState}
-          onKeyPress={(evt) => onEnterPressed(evt, saveChanges)}
-          required
-          error={!!errorState.client_secret}
-          helperText={errorState.client_secret}
-          fullWidth
+          <CustomSwitch is_sandbox_mode={is_sandbox_mode}
+                        updateFormState={updateFormState}/>
 
-        />
-      </div>
-
-      <FormControlLabel className="switch-box margin-top-15" control={
-        <Switch
-          checked={is_sandbox_mode}
-          onChange={(event) => updateFormState(event)}
-          color="primary"
-          name="is_sandbox_mode"
-        />} label="Is sandbox mode?">
-      </FormControlLabel>
-
-      <div className="add-key-pair-btn">
-        <Button onClick={saveChanges} className="blue-btn"
-                variant="contained">
-          {loading ?
-            <CircularProgress size={30} color='inherit'/> : "Save keys"}
-        </Button>
-      </div>
-    </div>
-  </Paper>
+          <div className="add-key-pair-btn">
+            <Button
+              variant="contained"
+              color="primary"
+              className="spinner-container"
+              type="submit"
+              onClick={saveChanges}
+            >
+              {loading ?
+                <CircularProgress size={30} color='inherit'/> : "Save keys"}
+            </Button>
+          </div>
+        </div>
+      </Paper>
+    </Container>
+  );
 }
