@@ -11,7 +11,6 @@ import {
   TableRow,
 } from '@material-ui/core'
 import {PAGE_LIMIT} from "../../../consts";
-import {ReactComponent as Sort} from "../../../icons/sort.svg";
 import {ReactComponent as Empty} from "../../../icons/empty.svg";
 
 
@@ -66,7 +65,7 @@ export const EmploymentsTable = ({
             {employments.map(employment => (
               <TableCell className="small-table-head">
                 <div className="table-th-centered">
-                  {employment.name} <Sort/>
+                  {employment.name}
                 </div>
               </TableCell>
             ))}
