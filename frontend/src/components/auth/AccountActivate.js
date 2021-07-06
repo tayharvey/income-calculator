@@ -1,19 +1,12 @@
 import React, {useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import {activateAccountService} from "../../services/AuthService";
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import {Button, Card, TextField, Typography,} from "@material-ui/core";
 import CircularProgress from '@material-ui/core/CircularProgress';
-import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import {displayErrorNotifications} from "../utils/notifications"
 import {onEnterPressed} from "../utils/general"
 import {PASSWORD_INITIAL_STATE} from "../../consts";
+import {ReactComponent as Lock} from "../../icons/lock.svg";
 
 export const AccountActivate = () => {
   const history = useHistory();
@@ -51,10 +44,10 @@ export const AccountActivate = () => {
   };
 
   return (
-    <Box>
-      <Container>
-        <Card className="card-auth margin-top-25">
-          <PowerSettingsNewIcon className="login-icon"/>
+    <div className="login-background">
+      <div className="center">
+        <Card className="card-auth">
+          <Lock className="top-icon"/>
           <Typography className="margin-top-25" variant="h5" align="center">
             Activate Account
           </Typography>
@@ -62,13 +55,14 @@ export const AccountActivate = () => {
             <TextField
               id="password"
               label="New password"
+              variant="outlined"
+              size="small"
+              margin="normal"
               value={inputForm.password}
               error={!!inputFormErrors.password}
               helperText={inputFormErrors.password}
               onChange={handleChange}
               onKeyPress={(evt) => onEnterPressed(evt, submitForm)}
-              variant="standard"
-              margin="normal"
               fullWidth
               type="password"
             />
@@ -77,13 +71,14 @@ export const AccountActivate = () => {
             <TextField
               id="password_confirmed"
               label="Confirm your password"
+              variant="outlined"
+              size="small"
+              margin="normal"
               value={inputForm.password_confirmed}
               error={!!inputFormErrors.password_confirmed}
               helperText={inputFormErrors.password_confirmed}
               onChange={handleChange}
               onKeyPress={(evt) => onEnterPressed(evt, submitForm)}
-              variant="standard"
-              margin="normal"
               fullWidth
               type="password"
             />
@@ -102,7 +97,7 @@ export const AccountActivate = () => {
             </Button>
           </div>
         </Card>
-      </Container>
-    </Box>
+      </div>
+    </div>
   );
 }

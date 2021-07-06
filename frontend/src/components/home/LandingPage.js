@@ -1,5 +1,5 @@
 import {Button, Card, Grid} from "@material-ui/core";
-import React from "react";
+import React, {useEffect} from "react";
 import {TopNavBar} from "./TopNavBar";
 import "../stylesheets/styles-landing-page.css";
 import {ReactComponent as Next} from "../../icons/next.svg";
@@ -16,8 +16,16 @@ import {Footer} from "./Footer";
 
 
 export const LandingPage = () => {
-  document.body.style.backgroundColor = "white";
-  document.body.style.margin = "0";
+  useEffect(() => {
+    // Anything in here is fired on component mount.
+    document.body.style.backgroundColor = "white";
+    document.body.style.margin = "0px";
+    return () => {
+      // Anything in here is fired on component unmount.
+      document.body.style.backgroundColor = "#F2F6F9";
+      document.body.style.margin = "25px";
+    }
+  }, []);
 
   return (
     <>
