@@ -9,18 +9,18 @@ highchartsMore(Highcharts);
 export const Chart = ({data}) => {
 
   const xCategories = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
     "" // Extra value to have extra space on the right side of chart
   ];
 
@@ -42,7 +42,6 @@ export const Chart = ({data}) => {
     }
     return newArray;
   };
-
 
   /* This function properly formats data for arearange series
      Format: [[key, lower, upper]]
@@ -80,12 +79,12 @@ export const Chart = ({data}) => {
 
   const getPrevxCategoriesElem = (val) => {
     const nameIndex = xCategories.indexOf(val)
-    if (nameIndex === -1 || nameIndex-1 < 0)
+    if (nameIndex === -1 || nameIndex - 1 < 0)
       return 'ERROR'
     return xCategories[nameIndex - 1]
   }
 
-  const getMonthIndex = (month) =>{
+  const getMonthIndex = (month) => {
     return xCategories.indexOf(month)
   }
 
@@ -109,14 +108,24 @@ export const Chart = ({data}) => {
 
   const options = {
     title: null,
+    chart: {
+      spacingBottom: 15,
+      spacingTop: 10,
+      spacingLeft: 10,
+      spacingRight: 15,
+    },
     credits: {
       enabled: false,
     },
     legend: {
       layout: "horizontal",
-      align: "center",
+      align: "right",
       verticalAlign: "top",
-      margin: 30
+      useHTML: true,
+      itemStyle: {
+        textTransform: "uppercase",
+        color: "#4C4F56"
+      }
     },
     yAxis: {
       title: null,
@@ -125,7 +134,17 @@ export const Chart = ({data}) => {
       endOnTick: true,
       startOnTick: true,
       lineWidth: 1,
-      lineColor: "black",
+      lineColor: "#E9EEF4",
+      gridLineDashStyle: "longdash",
+      gridLineColor: "#E9EEF4",
+      labels: {
+        style: {
+          fontWeight: "bold",
+          color: "#98A0B2",
+          textTransform: "uppercase",
+          textAlign: "left"
+        }
+      }
     },
     xAxis: {
       categories: xCategories,
@@ -133,29 +152,37 @@ export const Chart = ({data}) => {
       title: null,
       labels: {
         step: 1,
-        staggerLines: 2,
+        style: {
+          fontWeight: "bold",
+          color: "#98A0B2"
+        }
       },
-      lineColor: "black",
-      gridLineWidth: 1,
+      lineColor: "#E9EEF4",
+      gridLineWidth: 0,
       showLastLabel: true,
       startOnTick: true,
       endOnTick: true,
       tickmarkPlacement: 'on',
       plotLines: [{
         label: {
-          text: "Today",
+          text: "TODAY",
           align: "center",
           verticalAlign: "center",
           textAlign: "center",
-          y: -10,
+          useHTML: true,
+          y: -13,
+          x: -8,
           style: {
-            color: '#767373',
+            color: "white",
+            backgroundColor: "#60D1FA",
+            boxShadow: "0px 4px 12px #dadbe0",
+            borderRadius: "21px",
+            padding: "5px 8px",
           },
           rotation: 0
         },
-        color: '#767373',
+        color: '#60D1FA',
         width: 1,
-        dashStyle: 'Dash',
         value: currentDayPosition()
       }]
     },
@@ -164,7 +191,7 @@ export const Chart = ({data}) => {
         name: "Last Year",
         type: "line",
         data: toSumArray(!!data && data["LAST_YEAR"]),
-        color: "#4c7cda",
+        color: "#6563FF",
         marker: {
           symbol: "circle"
         }
@@ -173,7 +200,7 @@ export const Chart = ({data}) => {
         name: "YTD",
         type: "line",
         data: toSumArray(!!data && data["CURRENT_YEAR"]),
-        color: "#067008",
+        color: "#60D1FA",
         marker: {
           symbol: "circle"
         }
@@ -181,12 +208,12 @@ export const Chart = ({data}) => {
       {
         name: "Projected",
         type: "line",
+        lineWidth: 3,
         data: toSumArray(!!data && data["PROJECTED"]),
-        color: "#f1855e",
+        color: "#62D649",
         marker: {
           symbol: "circle"
         },
-        dashStyle: 'dot',
         zoneAxis: 'x',
         // hiding displaying data before currentDayPosition
         zones: [
@@ -200,11 +227,18 @@ export const Chart = ({data}) => {
         name: 'StDevRange',
         data: rangeData(!!data && data["PROJECTED"], !!data && data["PROJECTED_STDEV_LOWER"], !!data && data["PROJECTED_STDEV_UPPER"]),
         type: 'arearange',
-        lineWidth: 0,
+        lineWidth: 0.5,
         fillOpacity: 0.5,
+        fillColor: {
+          linearGradient: [0, 0, 0, 300],
+          stops: [
+            [0, "#62D649"],
+            [1, Highcharts.Color("#A0D649").setOpacity(0).get('rgba')]
+          ]
+        },
         showInLegend: false,
         zoneAxis: 'x',
-        color: '#f3ccbe',
+        color: "#62D649",
         // hiding displaying data before currentDayPosition
         zones: [
           {
@@ -217,9 +251,13 @@ export const Chart = ({data}) => {
     tooltip: {
       shared: true,
       valuePrefix: '$',
-      distance: 40,
+      distance: 20,
       useHTML: true,
-      backgroundColor: "white",
+      backgroundColor: false,
+      shadow: false,
+      borderColor: {
+        color: false
+      },
       formatter: function () {
         let styles = this.points.filter(({point}) => point.color !== 'none').reduce(function (s, point) {
           // Do not display the tooltip for the first point
@@ -227,30 +265,37 @@ export const Chart = ({data}) => {
             return false
           // here we are handling the Range series and formatting tooltip for these lines
           if (point.point.low && point.point.high) {
-            return `${s}<div style="margin-top: 5px"><span style="color:${point.color}">● </span> Projected + 1 year stdev: ${formatMoney(point.point.high)}</div>
-                        <div style="margin-top: 5px"><span style="color:${point.color}">● </span> Projected - 1 year stdev: ${formatMoney(point.point.low)}</div>`;
+            return `${s}<div style="margin-top: 8px"><span style="color: #62D649; opacity: 0.5;">● </span> Projected + 1 year stdev: ${formatMoney(point.point.high)}</div>
+                        <div style="margin-top: 8px"><span style="color: #62D649; opacity: 0.3;">● </span> Projected - 1 year stdev: ${formatMoney(point.point.low)}</div>`;
           }
-          if (getMonthIndex(point.x) < currentDayPosition() && point.series.name === 'Projected'){
+          if (getMonthIndex(point.x) < currentDayPosition() && point.series.name === 'Projected') {
             return s
           }
-          return `${s}<div style="margin-top: 5px"><span style="color:${point.color}">● </span> ${point.series.name}: ${formatMoney(point.y)}</div>`;
-        }, `<div style="font-weight: bold"> ${getPrevxCategoriesElem(this.x)} ● Gross Income </div>`);
+          return `${s}<div style="margin-top: 8px"><span style="color:${point.color}">● </span> ${point.series.name}: ${formatMoney(point.y)}</div>`;
+        }, `<div> ${getPrevxCategoriesElem(this.x)} ● Gross Income </div>`);
 
         if (!styles) return false
-        return `<div style="display: flex; flex-direction: column">${styles}</div>`
+        return `<div class="custom-tooltip">${styles}</div>`
       },
     },
     plotOptions: {
       series: {
         pointPlacement: 'on',
+        marker: {
+          borderWidth: 0,
+          lineWidth: 2
+        }
       }
     },
   };
 
   // Reset drawPoints function- it allows us to display bullets only on hover, not display bullets all the time
-  Highcharts.Series.prototype.drawPoints = function () {
-  };
+  Highcharts.Series.prototype.drawPoints = function () {};
 
-  return <HighchartsReact highcharts={Highcharts} options={options}
-                          constructorType={'chart'}/>;
+  return (
+    <div style={{padding: 10}}>
+      <HighchartsReact highcharts={Highcharts} options={options}
+                       constructorType={'chart'}/>
+    </div>
+  );
 };
