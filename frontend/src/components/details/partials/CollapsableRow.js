@@ -89,7 +89,7 @@ export const CollapsableRow = ({name, data, dataKey}) => {
             </TableCell>
 
             <CalculationTooltip
-              title={CALCULATION_TOOLTIPS[dataKey]?.companies[company]}
+              title={CALCULATION_TOOLTIPS[dataKey]?.companies.last_year_total}
               placement="top">
               <TableCell
                 className="small-table-row">
@@ -98,7 +98,7 @@ export const CollapsableRow = ({name, data, dataKey}) => {
             </CalculationTooltip>
 
             <CalculationTooltip
-              title={CALCULATION_TOOLTIPS[dataKey]?.companies[company]}
+              title={CALCULATION_TOOLTIPS[dataKey]?.companies.ytd_total}
               placement="top">
               <TableCell
                 className="small-table-row">
@@ -107,7 +107,7 @@ export const CollapsableRow = ({name, data, dataKey}) => {
             </CalculationTooltip>
 
             <CalculationTooltip
-              title={CALCULATION_TOOLTIPS[dataKey]?.companies[company]}
+              title={CALCULATION_TOOLTIPS[dataKey]?.companies.projected_total}
               placement="top">
               <TableCell
                 className="small-table-row">
