@@ -72,7 +72,6 @@ class ArgyleAPIWrapper:
         offset = 0
 
         while exist_next_page:
-
             response = requests.get(url, headers=self.get_headers(),
                                     params={**params, 'limit': limit, 'offset': offset})
             data = response.json()
@@ -113,9 +112,8 @@ class ArgyleAPIWrapper:
 
         results = self._get_merged_results_from_url(url, params)
         # Needed filter by company:
-        results = filter(lambda result: result['employer'] == employer, results)
+        return list(filter(lambda result: result['employer'] == employer, results))
 
-        return results
 
     def get_all_payouts(self, user_id, from_start_date=None, to_start_date=None):
         """
