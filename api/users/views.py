@@ -69,11 +69,10 @@ class ArgyleUsersListCreate(generics.ListCreateAPIView):
     """
 
     serializer_class = ArgyleUserSerializer
-    queryset = ArgyleUser.objects.all()
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self, *args, **kwargs):
-        qs = super().get_queryset()
+        qs = ArgyleUser.objects.all()
         sort = self.request.GET.get("sort")
         search = self.request.GET.get("search")
 

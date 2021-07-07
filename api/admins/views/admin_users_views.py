@@ -58,12 +58,11 @@ class FetchAdminUsers(generics.ListAPIView):
             }
         ]
     """
-    queryset = AdminUser.objects.all().order_by('email')
     serializer_class = AdminUserListSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self, *args, **kwargs):
-        qs = super().get_queryset()
+        qs = AdminUser.objects.all()
         sort = self.request.GET.get("sort")
         search = self.request.GET.get("search")
 
