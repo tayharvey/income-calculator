@@ -17,14 +17,18 @@ class EmploymentService:
         hire_datetime = get_date_from_str(employment['hire_datetime'])
         termination_datetime = get_date_from_str(employment['termination_datetime'])
 
-        if not hire_datetime and termination_datetime:
+        if not hire_datetime and not termination_datetime:
+            return False
+        
+        elif not hire_datetime and termination_datetime:
             return termination_datetime >= from_date
 
         elif hire_datetime and not termination_datetime:
             return hire_datetime <= to_date
-
+        
         else:
             return hire_datetime <= to_date and termination_datetime >= from_date
+            
 
     @staticmethod
     def get_employment_from_last_year(employments):
