@@ -50,7 +50,7 @@ class EmploymentSerializer(serializers.Serializer):
 
         for payout in payouts:
             gross_pay_sum += Decimal(payout['gross_pay'])
-            hours_sum += Decimal(payout['hours'])
+            hours_sum += Decimal(payout['hours']) if payout['hours'] else 0
 
         if hours_sum == 0:
             return 0
