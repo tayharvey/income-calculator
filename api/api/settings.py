@@ -77,7 +77,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -113,14 +112,7 @@ WSGI_APPLICATION = 'api.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db', # set in docker-compose.yml
-        'PORT': 5432 # default postgres port
-    }
+    'default': env.db()
 }
 
 # Password validation
@@ -180,7 +172,6 @@ BASE_URL = env('BASE_URL')
 
 ARGYLE_API_URL = env('ARGYLE_API_URL')
 SANDBOX_ARGYLE_API_URL = env('SANDBOX_ARGYLE_API_URL')
-
 
 USE_X_FORWARDED_HOST = env("USE_X_FORWARDED_HOST")
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
