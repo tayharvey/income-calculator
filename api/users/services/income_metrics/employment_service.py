@@ -15,18 +15,16 @@ class EmploymentService:
     @staticmethod
     def filter_employments_by_dates(employment, from_date: datetime.date, to_date: datetime.date) -> bool:
         hire_datetime = get_date_from_str(employment['hire_datetime'])
-        termination_datetime = employment['termination_datetime']
+        termination_datetime = get_date_from_str(employment['termination_datetime'])
 
-        if employment['termination_datetime']:
-            termination_datetime = get_date_from_str(termination_datetime)
+        if not hire_datetime and termination_datetime:
+            return termination_datetime >= from_date
 
-        if not termination_datetime:
+        elif hire_datetime and not termination_datetime:
             return hire_datetime <= to_date
 
-        if hire_datetime <= to_date and termination_datetime >= from_date:
-            return True
-
-        return False
+        else:
+            return hire_datetime <= to_date and termination_datetime >= from_date
 
     @staticmethod
     def get_employment_from_last_year(employments):
