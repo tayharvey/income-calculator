@@ -16,23 +16,21 @@ Add users, visualize their income and employment history, project future income,
 ## Demo
 * **User Details**
 
-<img width="1680" alt="User Details page" src="https://user-images.githubusercontent.com/22115481/124821549-0e6dcf80-df99-11eb-89bd-5ce8713f4085.png" style="border-radius: 5px;">
-
-* **API Keys**
-
-<img width="1680" alt="API Keys" src="https://user-images.githubusercontent.com/22115481/124822118-b5eb0200-df99-11eb-8982-2b6c538ca77b.png" style="border-radius: 5px;">
-
-
-* **User List**
-
-<img width="1680" alt="User List" src="https://user-images.githubusercontent.com/22115481/124822137-b97e8900-df99-11eb-8783-52dd69e37665.png" style="border-radius: 5px;">
+<img width="1658" style="border-radius: 5px;" alt="User Details" src="https://user-images.githubusercontent.com/22115481/124945652-8e974200-e038-11eb-849b-22fdbb4a738f.png">
 
 
 * **Landing and Login pages**
 
-<img width="1680" alt="Landing Page" src="https://user-images.githubusercontent.com/22115481/124822247-da46de80-df99-11eb-958e-33b89fbbbaea.png" style="border-radius: 5px;">
-<img width="1680" alt="Login page" src="https://user-images.githubusercontent.com/22115481/124822249-db780b80-df99-11eb-9fa4-1759318feae9.png" style="border-radius: 5px;">
+<img width="1435" alt="Landing Page" src="https://user-images.githubusercontent.com/22115481/124945802-b090c480-e038-11eb-9fcc-603bc3f54dd1.png">
+<img width="1668" alt="Login page" src="https://user-images.githubusercontent.com/22115481/124945815-b25a8800-e038-11eb-9fba-6244e3103155.png">
 
+* **User List**
+
+<img width="1668" alt="User List" src="https://user-images.githubusercontent.com/22115481/124945778-aa024d00-e038-11eb-94fe-fc916ae5b1dc.png">
+
+* **API Keys**
+
+<img width="1668" alt="API Keys" src="https://user-images.githubusercontent.com/22115481/124945743-a373d580-e038-11eb-90e2-e4893b1762fe.png">
 
 ## Structure
 
