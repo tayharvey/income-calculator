@@ -3,6 +3,8 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import {formatMoney} from "../../utils/formatting";
 import highchartsMore from 'highcharts/highcharts-more';
+import ChartMarker from "../../../icons/chart-marker.svg";
+import ChartMarkerSecondary from "../../../icons/chart-marker-secondary.svg";
 
 highchartsMore(Highcharts);
 
@@ -206,24 +208,6 @@ export const Chart = ({data}) => {
         }
       },
       {
-        name: "Projected",
-        type: "line",
-        lineWidth: 3,
-        data: toSumArray(!!data && data["PROJECTED"]),
-        color: "#62D649",
-        marker: {
-          symbol: "circle"
-        },
-        zoneAxis: 'x',
-        // hiding displaying data before currentDayPosition
-        zones: [
-          {
-            value: currentDayPosition(),
-            color: 'transparent',
-          }
-        ]
-      },
-      {
         name: 'StDevRange',
         data: rangeData(!!data && data["PROJECTED"], !!data && data["PROJECTED_STDEV_LOWER"], !!data && data["PROJECTED_STDEV_UPPER"]),
         type: 'arearange',
@@ -245,8 +229,47 @@ export const Chart = ({data}) => {
             value: currentDayPosition(),
             color: 'none'
           }
+        ],
+        marker: {
+          symbol: `url(${ChartMarkerSecondary})`,
+          width: 40,
+          height: 40
+        },
+        states: {
+          hover: {
+            enabled: true,
+            halo: {
+              size: 0
+            }
+          }
+        }
+      },
+      {
+        name: "Projected",
+        type: "line",
+        lineWidth: 3,
+        data: toSumArray(!!data && data["PROJECTED"]),
+        color: "#62D649",
+        marker: {
+          symbol: `url(${ChartMarker})`
+        },
+        states: {
+          hover: {
+            enabled: true,
+            halo: {
+              size: 0
+            }
+          }
+        },
+        zoneAxis: 'x',
+        // hiding displaying data before currentDayPosition
+        zones: [
+          {
+            value: currentDayPosition(),
+            color: 'transparent',
+          }
         ]
-      }
+      },
     ],
     tooltip: {
       shared: true,
@@ -283,14 +306,16 @@ export const Chart = ({data}) => {
         pointPlacement: 'on',
         marker: {
           borderWidth: 0,
-          lineWidth: 2
+          lineWidth: 2,
+          zIndex: 9999
         }
       }
     },
   };
 
   // Reset drawPoints function- it allows us to display bullets only on hover, not display bullets all the time
-  Highcharts.Series.prototype.drawPoints = function () {};
+  Highcharts.Series.prototype.drawPoints = function () {
+  };
 
   return (
     <div style={{padding: 10}}>

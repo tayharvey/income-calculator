@@ -44,17 +44,17 @@ export const EmploymentsTable = ({
   }
 
   const formatData = (record, dataKey) => {
+    if (!record) {
+      return <Empty/>;
+    }
+
     if (dataKey === "pay_period_end_date" || dataKey === "hire_date" || dataKey === "termination_date") {
-      record = formatDate(record);
+      record = <span className="nowrap">{formatDate(record)}</span>;
     } else if (dataKey === "base_pay") {
       record = formatRate(record);
     }
 
-    if (!record) {
-      return <Empty/>;
-    } else {
-      return record;
-    }
+    return record;
   }
 
   return (
