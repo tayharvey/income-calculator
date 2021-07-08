@@ -6,7 +6,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import {displayErrorNotifications} from "../utils/notifications"
 import {onEnterPressed} from "../utils/general"
 import {PASSWORD_INITIAL_STATE} from "../../consts";
-import {ReactComponent as Lock} from "../../icons/lock.svg";
+import {ReactComponent as CheckMark} from "../../icons/checkmark.svg";
+import {ReactComponent as SignIn} from "../../icons/sign-in.svg";
 
 export const AccountActivate = () => {
   const history = useHistory();
@@ -47,7 +48,7 @@ export const AccountActivate = () => {
     <div className="login-background">
       <div className="center">
         <Card className="card-auth">
-          <Lock className="top-icon"/>
+          <CheckMark className="top-icon"/>
           <Typography className="margin-top-25" variant="h5" align="center">
             Activate Account
           </Typography>
@@ -93,7 +94,12 @@ export const AccountActivate = () => {
               onClick={submitForm}
             >
               {loading ?
-                <CircularProgress size={30} color='inherit'/> : "Submit"}
+                <CircularProgress size={30} color='inherit'/> : (
+                  <>
+                    Submit
+                    <SignIn className="right-icon"/>
+                  </>
+                )}
             </Button>
           </div>
         </Card>

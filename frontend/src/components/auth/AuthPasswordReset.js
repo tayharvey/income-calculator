@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {Button, Card, TextField, Typography} from "@material-ui/core";
-import SettingsBackupRestoreIcon
-  from '@material-ui/icons/SettingsBackupRestore';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {passwordResetService} from "../../services/AuthService";
 import {PASSWORD_RESET_INITIAL_STATE} from "../../consts";
@@ -11,6 +9,8 @@ import {
 } from "../utils/notifications"
 import {onEnterPressed} from "../utils/general"
 import "../stylesheets/styles-auth.css";
+import {ReactComponent as ResetPassword} from '../../icons/reset-password.svg';
+import {ReactComponent as SignIn} from "../../icons/sign-in.svg";
 
 export const PasswordReset = () => {
   const [formData, setFormData] = useState(PASSWORD_RESET_INITIAL_STATE);
@@ -51,7 +51,7 @@ export const PasswordReset = () => {
     <div className="login-background">
       <div className="center">
         <Card className="card-auth">
-          <SettingsBackupRestoreIcon className="login-icon"/>
+          <ResetPassword className="top-icon"/>
           <Typography className="margin-top-25" variant="h5" align="center">
             Password Reset
           </Typography>
@@ -80,8 +80,12 @@ export const PasswordReset = () => {
               fullWidth
               onClick={handleSubmit}
             >
-              {loading ? <CircularProgress size={30}
-                                           color='inherit'/> : "Reset Password"}
+              {loading ? <CircularProgress size={30} color='inherit'/> : (
+                <>
+                  Reset Password
+                  <SignIn className="right-icon"/>
+                </>
+              )}
             </Button>
           </div>
         </Card>

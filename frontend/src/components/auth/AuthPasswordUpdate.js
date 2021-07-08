@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {Button, Card, TextField, Typography,} from "@material-ui/core";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {useHistory, useParams} from "react-router-dom";
-import EditIcon from '@material-ui/icons/Edit';
 import {passwordUpdateService} from "../../services/AuthService";
 import "../stylesheets/styles-auth.css";
 import {PASSWORD_INITIAL_STATE} from "../../consts";
@@ -11,6 +10,8 @@ import {
   renderNotification
 } from "../utils/notifications"
 import {onEnterPressed} from "../utils/general"
+import {ReactComponent as SignIn} from "../../icons/sign-in.svg";
+import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 
 export const PasswordUpdate = () => {
   const history = useHistory()
@@ -58,11 +59,11 @@ export const PasswordUpdate = () => {
     <div className="login-background">
       <div className="center">
         <Card className="card-auth">
-          <EditIcon className="login-icon"/>
+          <EditTwoToneIcon style={{fill: "#6565F6"}} className="top-icon"/>
           <Typography className="margin-top-25" variant="h5" align="center">
             Change Password
           </Typography>
-          <div className="input-container margin-top-25">
+          <div className="input-container">
             <TextField
               label="New password"
               name="password"
@@ -79,7 +80,7 @@ export const PasswordUpdate = () => {
               onKeyPress={(evt) => onEnterPressed(evt, handleSubmit)}
             />
           </div>
-          <div className="input-container margin-top-25">
+          <div className="input-container">
             <TextField
               label="Repeat password"
               name="password_confirmed"
@@ -105,7 +106,12 @@ export const PasswordUpdate = () => {
               onClick={handleSubmit}
             >
               {loading ?
-                <CircularProgress size={30} color='inherit'/> : "Set Password"}
+                <CircularProgress size={30} color='inherit'/> : (
+                  <>
+                    Set Password
+                    <SignIn className="right-icon"/>
+                  </>
+                )}
             </Button>
           </div>
         </Card>
