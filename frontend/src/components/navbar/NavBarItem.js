@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 import "../stylesheets/styles-navigation.css"
 
 export const NavBarItem = ({link, title, icon, align}) => {
-  return <ListItem style={align === "bottom" ? {position: "absolute", "bottom": 20} : {}}>
+  return <ListItem className={align === "bottom" && "logout-btn"}>
     {icon}
     <NavLink to={link} className="navbar-link">
       {title}

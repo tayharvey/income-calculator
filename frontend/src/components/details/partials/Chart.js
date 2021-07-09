@@ -193,19 +193,13 @@ export const Chart = ({data}) => {
         name: "Last Year",
         type: "line",
         data: toSumArray(!!data && data["LAST_YEAR"]),
-        color: "#6563FF",
-        marker: {
-          symbol: "circle"
-        }
+        color: "#6563FF"
       },
       {
         name: "YTD",
         type: "line",
         data: toSumArray(!!data && data["CURRENT_YEAR"]),
-        color: "#60D1FA",
-        marker: {
-          symbol: "circle"
-        }
+        color: "#60D1FA"
       },
       {
         name: 'StDevRange',
