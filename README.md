@@ -2,7 +2,7 @@
 
 Add users, visualize their income and employment history, project future income, and conduct calculations on their data.
 
-Income Calculator gives you the following data for every user broken down by "Last Year", "Year To Date" and "Projected":
+**Income Calculator** gives you the following data for every user broken down by **_Last Year_**, **_Year To Date_** and **_Projected_**:
 - Number of days with employer
 - Hours worked per week
 - Pay frequency
