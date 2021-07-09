@@ -2,6 +2,20 @@
 
 Add users, visualize their income and employment history, project future income, and conduct calculations on their data.
 
+Income Calculator gives you the following data for every user broken down by "Last Year", "Year To Date" and "Projected":
+- Number of days with employer
+- Hours worked per week
+- Pay frequency
+- Rate of pay
+- Base pay
+- Net pay
+- Bonus pay
+- Overtime pay
+- Commission pay
+- Reimbursements
+- Gross Monthly Income
+- Taxes
+
 
 ## Table of contents
 
@@ -112,7 +126,9 @@ make run
 
 ## Extra
 
-### Makefile
+
+
+### Makefile commands
 
 Run project
 
