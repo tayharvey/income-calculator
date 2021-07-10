@@ -1,4 +1,7 @@
 import moment from 'moment'
+import {ReactComponent as PasswordHide} from "../../icons/password-hide.svg";
+import {ReactComponent as PasswordShow} from "../../icons/password-show.svg";
+import React from "react";
 
 export const onEnterPressed = (evt, func) => {
   if (evt.key === "Enter") {
@@ -61,5 +64,19 @@ export const sortTable = (column_name, sort, setSort) => {
     setSort(null);
   } else {
     setSort(column_name);
+  }
+}
+
+export const displayPasswordToggle = (showPassword, setShowPassword) => {
+  if (showPassword === true) {
+    return (
+      <PasswordShow className="password-toggle"
+                    onClick={() => setShowPassword(false)}/>
+    );
+  } else {
+    return (
+      <PasswordHide className="password-toggle"
+                    onClick={() => setShowPassword(true)}/>
+    );
   }
 }

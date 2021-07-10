@@ -24,6 +24,20 @@
 
 .input-container {
   width: initial !important;
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 18px;
+  right: 2px;
+  padding: 9px;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  z-index: 1;
+  background-color: white;
 }
 
 .top-icon {

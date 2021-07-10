@@ -4,7 +4,7 @@ import {activateAccountService} from "../../services/AuthService";
 import {Button, Card, TextField, Typography,} from "@material-ui/core";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {displayErrorNotifications} from "../utils/notifications"
-import {onEnterPressed} from "../utils/general"
+import {displayPasswordToggle, onEnterPressed} from "../utils/general"
 import {PASSWORD_INITIAL_STATE} from "../../consts";
 import {ReactComponent as CheckMark} from "../../icons/checkmark.svg";
 import {ReactComponent as SignIn} from "../../icons/sign-in.svg";
@@ -15,7 +15,8 @@ export const AccountActivate = () => {
 
   const [inputForm, setInputForm] = useState(PASSWORD_INITIAL_STATE);
   const [inputFormErrors, setInputFormErrors] = useState(PASSWORD_INITIAL_STATE);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const submitForm = () => {
     setLoading(true)
@@ -65,8 +66,9 @@ export const AccountActivate = () => {
               onChange={handleChange}
               onKeyPress={(evt) => onEnterPressed(evt, submitForm)}
               fullWidth
-              type="password"
+              type={showPassword === true ? "text" : "password"}
             />
+            {displayPasswordToggle(showPassword, setShowPassword)}
           </div>
           <div className="input-container">
             <TextField
@@ -81,8 +83,9 @@ export const AccountActivate = () => {
               onChange={handleChange}
               onKeyPress={(evt) => onEnterPressed(evt, submitForm)}
               fullWidth
-              type="password"
+              type={showPassword === true ? "text" : "password"}
             />
+            {displayPasswordToggle(showPassword, setShowPassword)}
           </div>
           <div className="input-container margin-top-25">
             <Button

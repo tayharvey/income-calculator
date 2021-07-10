@@ -9,7 +9,7 @@ import {
   displayErrorNotifications,
   renderNotification
 } from "../utils/notifications"
-import {onEnterPressed} from "../utils/general"
+import {displayPasswordToggle, onEnterPressed} from "../utils/general"
 import {ReactComponent as SignIn} from "../../icons/sign-in.svg";
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 
@@ -20,7 +20,8 @@ export const PasswordUpdate = () => {
     ...useParams(),
   });
   const [formErrors, setFormErrors] = useState(PASSWORD_INITIAL_STATE);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     // Anything in here is fired on component mount.
@@ -67,7 +68,7 @@ export const PasswordUpdate = () => {
             <TextField
               label="New password"
               name="password"
-              type="password"
+              type={showPassword === true ? "text" : "password"}
               variant="outlined"
               size="small"
               margin="normal"
@@ -79,12 +80,13 @@ export const PasswordUpdate = () => {
               helperText={formErrors.password}
               onKeyPress={(evt) => onEnterPressed(evt, handleSubmit)}
             />
+            {displayPasswordToggle(showPassword, setShowPassword)}
           </div>
           <div className="input-container">
             <TextField
               label="Repeat password"
               name="password_confirmed"
-              type="password"
+              type={showPassword === true ? "text" : "password"}
               variant="outlined"
               size="small"
               margin="normal"
@@ -96,6 +98,7 @@ export const PasswordUpdate = () => {
               helperText={formErrors.password_confirmed}
               onKeyPress={(evt) => onEnterPressed(evt, handleSubmit)}
             />
+            {displayPasswordToggle(showPassword, setShowPassword)}
           </div>
           <div className="input-container margin-top-25">
             <Button

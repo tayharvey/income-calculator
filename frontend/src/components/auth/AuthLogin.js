@@ -3,7 +3,7 @@ import {Button, Card, TextField, Typography,} from "@material-ui/core";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {useHistory} from "react-router-dom";
 import {LOGIN_INITIAL_STATE} from "../../consts";
-import {onEnterPressed} from "../utils/general"
+import {displayPasswordToggle, onEnterPressed} from "../utils/general"
 import {loginService} from "../../services/AuthService"
 import {displayErrorNotifications} from "../utils/notifications"
 import "../stylesheets/styles-auth.css";
@@ -15,6 +15,7 @@ export const Login = () => {
   const [formData, setFormData] = useState(LOGIN_INITIAL_STATE);
   const [formErrors, setFormErrors] = useState(LOGIN_INITIAL_STATE);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     // Anything in here is fired on component mount.
@@ -82,7 +83,7 @@ export const Login = () => {
               variant="outlined"
               size="small"
               margin="normal"
-              type="password"
+              type={showPassword === true ? "text" : "password"}
               required
               fullWidth
               value={formData.password}
@@ -91,6 +92,7 @@ export const Login = () => {
               error={!!formErrors.password}
               helperText={formErrors.password}
             />
+            {displayPasswordToggle(showPassword, setShowPassword)}
           </div>
           <div className="input-container margin-top-25">
             <Button
