@@ -16,7 +16,10 @@ import {formatMoney, formatPhoneNumber} from "../utils/formatting";
 import {ProgressContainer} from "../common/ProgressContainer";
 import {getUserInitials} from "../utils/general";
 import {ReactComponent as LeftArrow} from "../../icons/left-arrow.svg";
+import {ReactComponent as IndicatorUp} from "../../icons/indicator-up.svg";
+import {ReactComponent as IndicatorDown} from "../../icons/indicator-down.svg";
 import {IncomeMetricsTable} from "./partials/IncomeMetricsTable";
+import moment from "moment";
 
 export const DetailsView = () => {
   const [userProfileData, setUserProfileData] = useState(null)
@@ -73,6 +76,18 @@ export const DetailsView = () => {
 
   const goBack = () => {
     history.push("/users/");
+  }
+
+  const displayIndicator = () => {
+    const curr_month_idx = moment().month();
+    const prev_month_last_year = monthMetrics["LAST_YEAR"][curr_month_idx - 1];
+    const prev_month_income = monthMetrics["CURRENT_YEAR"][curr_month_idx - 1];
+
+    if (prev_month_income > prev_month_last_year) {
+      return <IndicatorUp className="indicator"/>;
+    } else if (prev_month_income < prev_month_last_year) {
+      return <IndicatorDown className="indicator"/>;
+    }
   }
 
   useEffect(loadUserData, [])
@@ -143,8 +158,9 @@ export const DetailsView = () => {
                     Current Year Projected Income
                   </div>
                   <div
-                    className="font-size-large font-bold">
+                    className="font-size-large font-bold flex">
                     {formatMoney(userIncomeMetrics.gross_pay.projected_total)}
+                    {displayIndicator()}
                   </div>
                 </div>
               </Grid>
